@@ -1,0 +1,66 @@
+"use client"
+import { useState } from "react";
+import Button from "../Buttons";
+import { FaAnglesRight } from "react-icons/fa6";
+import VideoModal from "./Modal";
+import Image from "next/image";
+
+const VideoSection = ({ data }) => {
+  const [toggle, setToggle] = useState(false);
+
+  const [iframeSrc, setIframeSrc] = useState("about:blank");
+
+  const handelClick = () => {
+    setIframeSrc(`${data.videoUrl}`);
+    setToggle(!toggle);
+  };
+  const handelClose = () => {
+    setIframeSrc("about:blank");
+    setToggle(!toggle);
+  };
+  return (
+    <>
+      <div className="container">
+        <div className="cs_video_wrapper">
+          <a className="cs_video_open cs_style_2" onClick={handelClick}>
+            <span className="cs_player_btn cs_center">
+              <span />
+            </span>
+          </a>
+          <h2 className="cs_video_title">
+            {data.title}
+            <span className="cs_accent_color">{data.highlightedText}</span>
+            <span dangerouslySetInnerHTML={{ __html: data.title2 }}></span>
+          </h2>
+          <p className="cs_video_subtitle">{data.subtitle}</p>
+          <div className="cs_hero_btns">
+            <Button
+              btnIcons={<FaAnglesRight />}
+              btnText={data.btnText}
+              variant={"cs_btn cs_style_1 cs_color_1"}
+              btnUrl={data.btnLink}
+            />
+            <Button
+              btnIcons={<FaAnglesRight />}
+              btnText={data.btnText1}
+              variant={"cs_btn cs_style_1 cs_color_2"}
+              btnUrl={data.btnLink1}
+            />
+          </div>
+          <div className="cs_height_120 cs_height_lg_80" />
+        </div>
+        <div className="cs_cta_shape position-absolute">
+        <Image src={data.shapeImage} className="cs_spinner_img" alt="img" width={140} height={164}   />
+        </div>
+      </div>
+
+      <VideoModal
+        isTrue={toggle}
+        iframeSrc={iframeSrc}
+        handelClose={handelClose}
+      />
+    </>
+  );
+};
+
+export default VideoSection;
