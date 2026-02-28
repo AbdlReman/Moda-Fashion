@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 export default function NewUserPage() {
   const router = useRouter();
-  const [form, setForm] = React.useState({ name: '', email: '', phone: '', role: 'member' });
+  const [form, setForm] = React.useState({ name: '', email: '', phone: '', role: 'user' });
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState('');
 
